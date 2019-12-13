@@ -80,10 +80,11 @@ class Row extends React.Component {
       const spanStyle = {
         width: item.width,
       };
+      const key = `${item[rowKey]}u${index}`;
 
       if (item.render) {
         return (
-          <span style={spanStyle} key={`${item[rowKey] + index}`} {...onCellObj}>
+          <span style={spanStyle} key={key} {...onCellObj}>
             <div className={`span-item ${rowCellClassName}`}>
               {item.render(data[item.dataIndex], data)}
             </div>
@@ -91,7 +92,7 @@ class Row extends React.Component {
         );
       }
       return (
-        <span style={spanStyle} key={`${item[rowKey] + index}`} {...onCellObj}>
+        <span style={spanStyle} key={key} {...onCellObj}>
           <div className={`span-item ${rowCellClassName}`}>{data[item.dataIndex]}</div>
         </span>
       );
