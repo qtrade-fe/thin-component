@@ -1,7 +1,7 @@
 {
   "name": "thin-component",
-  "version": "1.1.1",
-  "description": "lazy table from react component",
+  "version": "1.1.2",
+  "description": "lazy table for react component",
   "keywords": [
     "ant",
     "design",
