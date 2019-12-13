@@ -12,6 +12,13 @@
     "ui",
     "lazy table"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasyValley/thin-component.git"
+  },
   "private": false,
   "scripts": {
     "start": "npm run dev",
