@@ -76,14 +76,14 @@ class Row extends React.Component {
       );
     }
 
-    const htmlArr = columns.map(item => {
+    const htmlArr = columns.map((item, index) => {
       const spanStyle = {
         width: item.width,
       };
 
       if (item.render) {
         return (
-          <span style={spanStyle} key={item[rowKey]} {...onCellObj}>
+          <span style={spanStyle} key={`${item[rowKey] + index}`} {...onCellObj}>
             <div className={`span-item ${rowCellClassName}`}>
               {item.render(data[item.dataIndex], data)}
             </div>
@@ -91,7 +91,7 @@ class Row extends React.Component {
         );
       }
       return (
-        <span style={spanStyle} key={item[rowKey]} {...onCellObj}>
+        <span style={spanStyle} key={`${item[rowKey] + index}`} {...onCellObj}>
           <div className={`span-item ${rowCellClassName}`}>{data[item.dataIndex]}</div>
         </span>
       );
