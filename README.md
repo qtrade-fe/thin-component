@@ -1,16 +1,27 @@
 ### 使用
 
-- `npm i` 安装包
-- `npm start`或者`npm run dev` 启动本地开发环境
-- `npm build` 打包
+- `npm i thin-component` 安装包
 
 ### example
 
 参考 [antd](https://ant.design/components/table-cn/) Table 组件用法, 具体用法可以参考 src/app/index.jsx 源码
 
-## \* 注意！ columns 必须设置 width
+## \* 注意！
+
+1. columns 必须设置 width
+2. webpack 的 rule 需要加 test: /(\.jsx)\$/ 并且 不要设置 exclude: /node_modules/
+
+````js
+{
+    test: /(\.jsx)$/,
+    // exclude: /node_modules/,
+}
+```
+## 示例
 
 ```jsx
+import { LazyTable } from 'thin-component'
+
 <LazyTable
   // loadingElement={<div>哈哈哈佳佳...</div>}
   loading={false}
@@ -45,4 +56,4 @@
   lazyLoading={false}
   onScrollBottom={() => {}}
 />
-```
+````
