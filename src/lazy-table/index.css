@@ -1,0 +1,147 @@
+.lazy-table-table-box-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  border: 1px solid #d1d8de;
+}
+.lazy-table-table-box {
+  display: inline-block;
+  max-width: 100%;
+  overflow: auto;
+  border-top: 1px solid #d1d8de;
+}
+.lazy-table-table-box .table-column {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+}
+.lazy-table-table-box .column-content {
+  display: inline-block;
+}
+.lazy-table-table-box .first-loading-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+}
+.lazy-table-table-box .first-loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.lazy-table-table-box .loading-box {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+}
+.lazy-table-table-box .loading-box-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.lazy-table-table-box .table {
+  display: inline-block;
+  background: #fff;
+}
+.lazy-table-table-box .row {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid #d1d8de;
+}
+.lazy-table-table-box .row:hover {
+  background: #cce6ff;
+}
+.lazy-table-table-box .row-column:hover {
+  background: #f0f8ff;
+}
+.lazy-table-table-box .row-column {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+  background: #f0f8ff;
+  border-bottom: 0;
+}
+.lazy-table-table-box .row > span {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-right: 1px solid #d1d8de;
+}
+.lazy-table-table-box .span-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.lazy-table-table-box .row > span:last-child {
+  border-right: 0;
+}
+.lazy-table-table-box .row > .checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lazy-table-table-box .ant-spin.ant-spin-show-text .ant-spin-text {
+  font-size: 12px;
+}
+.lazy-table-table-box .empty-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+.lazy-table-table-box .sort-box {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 20px;
+  margin-left: 4px;
+  color: #bfbfbf;
+}
+.lazy-table-table-box .sort-box .up {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+}
+.lazy-table-table-box .sort-box .down {
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+.lazy-table-table-box .sort-box .active {
+  color: #1890ff;
+}
+.lazy-table-table-box .column-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.lazy-table-table-box .column-has-sorter {
+  cursor: pointer;
+}
+.lazy-table-table-box .column-item-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

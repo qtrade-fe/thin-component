@@ -2,7 +2,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.less';
+import './index.css';
 import { Spin } from 'antd';
 import Row from './row';
 import Columns from './columns';

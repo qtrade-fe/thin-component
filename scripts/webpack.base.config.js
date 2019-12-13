@@ -6,7 +6,7 @@ const resolve = relatedPath => path.resolve(__dirname, relatedPath);
 
 const webpackConfigBase = {
   entry: {
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'babel-polyfill'],
+    vendor: ['react', 'react-dom'],
     main: resolve('../src/main.jsx'),
   },
   output: {

@@ -31,7 +31,8 @@
     "lint:fix": "npm run eslint:fix && npm run stylelint:fix",
     "prettier": "npm run prettier:js && npm run prettier:style",
     "prettier:js": "prettier --config ./.prettierrc --write 'src/**/*.js'",
-    "prettier:style": "prettier --config ./.prettierrc --write 'src/**/*.less'"
+    "prettier:style": "prettier --config ./.prettierrc --write 'src/**/*.less'",
+    "less":"lessc ./src/lazy-table/index.less ./src/lazy-table/index.css"
   },
   "author": "easyvalley",
   "babel": {
@@ -69,7 +70,7 @@
     "happypack": "^5.0.1",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.14.3",
-    "less": "~3.9.0",
+    "less": "^3.9.0",
     "less-loader": "~4.1.0",
     "lint-staged": "^7.0.5",
     "prettier": "^1.18.2",
