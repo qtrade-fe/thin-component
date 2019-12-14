@@ -158,12 +158,9 @@ class Columns extends React.Component {
             axis="both"
             handle={this.renderHandleHtml()}
           >
-            <span
-              style={spanStyle}
-              key={item.key}
-              onClick={this.handleSort.bind(this, sorter, item.dataIndex)}
-            >
+            <span style={spanStyle}>
               <div
+                onClick={this.handleSort.bind(this, sorter, item.dataIndex)}
                 className={
                   sorter
                     ? `column-item column-has-sorter ${headerCellClassName}`
