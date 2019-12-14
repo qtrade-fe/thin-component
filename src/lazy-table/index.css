@@ -81,9 +81,6 @@
   display: flex;
   align-items: center;
   height: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   border-right: 1px solid #d1d8de;
 }
 .lazy-table-table-box .span-item {
@@ -144,4 +141,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.lazy-table-table-box .drag-item {
+  position: relative;
+  right: -4px;
+  display: flex;
+  width: 8px;
+  height: 100%;
+  cursor: ew-resize;
+  background: rgba(0, 0, 0, 0);
 }
