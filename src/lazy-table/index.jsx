@@ -179,12 +179,23 @@ class LazyTable extends React.Component {
     if (!copy[index]) {
       copy[index] = 0;
     }
+    const minWidth = 50;
     if (index + 1 < len) {
       if (!copy[index + 1]) {
         copy[index + 1] = 0;
       }
+      const c1 = copy[index];
+      const c2 = copy[index + 1];
+
       copy[index] += movementX;
       copy[index + 1] -= movementX;
+      if (
+        copy[index] + columns[index].width <= minWidth ||
+        copy[index + 1] + columns[index + 1].width <= minWidth
+      ) {
+        copy[index] = c1;
+        copy[index + 1] = c2;
+      }
     }
     this.setState({
       columnSize: copy,

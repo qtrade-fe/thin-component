@@ -131,8 +131,8 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 2px;
+  padding-left: 2px;
 }
 .lazy-table-table-box .column-has-sorter {
   cursor: pointer;
@@ -145,6 +145,7 @@
 .lazy-table-table-box .drag-item {
   position: relative;
   right: -4px;
+  z-index: 2;
   display: flex;
   width: 8px;
   height: 100%;

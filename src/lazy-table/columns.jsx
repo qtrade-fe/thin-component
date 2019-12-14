@@ -168,7 +168,7 @@ class Columns extends React.Component {
                 }
               >
                 <span
-                  style={{ maxWidth: spanWidth, display: 'inline-block' }}
+                  style={{ maxWidth: spanWidth - 4, display: 'inline-block' }}
                   className="column-item-text"
                 >
                   {item.title}
