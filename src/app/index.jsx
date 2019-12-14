@@ -14,7 +14,7 @@ class UseTreeDemo extends React.Component {
 
   getDataSource = () => {
     const arr = [];
-    for (let i = 0; i < 100; i += 1) {
+    for (let i = 0; i < 30; i += 1) {
       arr.push({
         key: `1${i}`,
         name: `胡彦斌${i}`,
@@ -132,6 +132,7 @@ class UseTreeDemo extends React.Component {
           rowKey="key"
           lazyLoading={false}
           onScrollBottom={() => {}}
+          isResizeColumn
         />
       </div>
     );

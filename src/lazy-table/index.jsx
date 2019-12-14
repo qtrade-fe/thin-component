@@ -2,7 +2,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
+import './index.less';
 import { Spin } from 'antd';
 import Row from './row';
 import Columns from './columns';
@@ -23,6 +23,7 @@ class LazyTable extends React.Component {
       loadingTop: 0,
       checkboxWidth: 40,
       tableWidth: 0,
+      columnSize: [],
     };
   }
 
@@ -169,6 +170,42 @@ class LazyTable extends React.Component {
     return dataSource;
   };
 
+  handleResizeColumn = (e, index) => {
+    const { columns } = this.props;
+    const { columnSize } = this.state;
+    const copy = [...columnSize];
+    const len = columns.length;
+    const { movementX } = e;
+    if (!copy[index]) {
+      copy[index] = 0;
+    }
+    if (index + 1 < len) {
+      if (!copy[index + 1]) {
+        copy[index + 1] = 0;
+      }
+      copy[index] += movementX;
+      copy[index + 1] -= movementX;
+    }
+    this.setState({
+      columnSize: copy,
+    });
+  };
+
+  getResizedColumn = columns => {
+    const { columnSize } = this.state;
+    const arr = [];
+    const len = columns.length;
+
+    for (let i = 0; i < len; i += 1) {
+      const item = columns[i];
+      const w = columnSize[i] ? columnSize[i] : 0;
+      const cp = { ...item };
+      cp.width += w;
+      arr.push(cp);
+    }
+    return arr;
+  };
+
   render() {
     const {
       columns,
@@ -183,6 +220,7 @@ class LazyTable extends React.Component {
       onCell,
       rowCellClassName,
       headerCellClassName,
+      isResizeColumn,
     } = this.props;
     const { y } = scroll;
     const { columnId, tableId, checkboxWidth } = this.state;
@@ -194,6 +232,8 @@ class LazyTable extends React.Component {
     const totalWidth = this.getTotalWidth();
     const boxStyle = this.getBoxStyle(len, y, totalWidth, isEmpty, lazyLoading);
 
+    const resizedColumn = this.getResizedColumn(columns);
+
     return (
       <div className="lazy-table-table-box-wrap" style={boxStyle}>
         <div className="lazy-table-table-box" id={tableId} style={{ maxHeight: y }}>
@@ -203,9 +243,11 @@ class LazyTable extends React.Component {
               <div className="column-content">
                 <div className="row row-column" style={columnStyle}>
                   <Columns
+                    isResizeColumn={isResizeColumn}
+                    onResize={this.handleResizeColumn}
                     headerCellClassName={headerCellClassName}
                     checkboxWidth={checkboxWidth}
-                    columns={columns}
+                    columns={resizedColumn}
                     rowSelection={rowSelection}
                     dataSource={dataSource}
                     rowKey={rowKey}
@@ -235,7 +277,7 @@ class LazyTable extends React.Component {
                   data={flag ? item : null}
                   key={item[rowKey]}
                   height={rowHeight}
-                  columns={columns}
+                  columns={resizedColumn}
                   rowKey={rowKey}
                 />
               );
@@ -274,6 +316,7 @@ LazyTable.defaultProps = {
   },
   rowCellClassName: '',
   headerCellClassName: '',
+  isResizeColumn: true,
 };
 LazyTable.propTypes = {
   dataSource: PropTypes.array.isRequired,
@@ -294,5 +337,6 @@ LazyTable.propTypes = {
   onCell: PropTypes.func,
   rowCellClassName: PropTypes.string,
   headerCellClassName: PropTypes.string,
+  isResizeColumn: PropTypes.bool,
 };
 export default LazyTable;

@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
+import { Resizable } from 'react-resizable';
 import Sorter from './sorter';
 
 class Columns extends React.Component {
@@ -94,8 +95,23 @@ class Columns extends React.Component {
     }
   };
 
+  renderHandleHtml = () => {
+    const { isResizeColumn } = this.props;
+    if (!isResizeColumn) {
+      return null;
+    }
+    return <div className="drag-item" />;
+  };
+
   render() {
-    const { columns, rowSelection, dataSource, checkboxWidth, headerCellClassName } = this.props;
+    const {
+      columns,
+      rowSelection,
+      dataSource,
+      checkboxWidth,
+      headerCellClassName,
+      onResize,
+    } = this.props;
     const { sorterActiveField, sorterDirection } = this.state;
     const arr = [];
     if (rowSelection) {
@@ -132,27 +148,38 @@ class Columns extends React.Component {
         }
         const value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
         return (
-          <span
-            style={spanStyle}
+          <Resizable
             key={item.key}
-            onClick={this.handleSort.bind(this, sorter, item.dataIndex)}
+            width={item.width}
+            height={0}
+            onResize={(e, resizeData) => {
+              onResize(e, index, resizeData);
+            }}
+            axis="both"
+            handle={this.renderHandleHtml()}
           >
-            <div
-              className={
-                sorter
-                  ? `column-item column-has-sorter ${headerCellClassName}`
-                  : `column-item ${headerCellClassName}`
-              }
+            <span
+              style={spanStyle}
+              key={item.key}
+              onClick={this.handleSort.bind(this, sorter, item.dataIndex)}
             >
-              <span
-                style={{ maxWidth: spanWidth, display: 'inline-block' }}
-                className="column-item-text"
+              <div
+                className={
+                  sorter
+                    ? `column-item column-has-sorter ${headerCellClassName}`
+                    : `column-item ${headerCellClassName}`
+                }
               >
-                {item.title}
-              </span>
-              {sorter ? <Sorter value={value} /> : null}
-            </div>
-          </span>
+                <span
+                  style={{ maxWidth: spanWidth, display: 'inline-block' }}
+                  className="column-item-text"
+                >
+                  {item.title}
+                </span>
+                {sorter ? <Sorter value={value} /> : null}
+              </div>
+            </span>
+          </Resizable>
         );
       }),
       <span style={{ width: 50 }} key="item.key" />
@@ -164,6 +191,8 @@ Columns.defaultProps = {
   rowSelection: null,
   onSort: () => {},
   headerCellClassName: '',
+  onResize: () => {},
+  isResizeColumn: true,
 };
 Columns.propTypes = {
   columns: PropTypes.array,
@@ -172,5 +201,7 @@ Columns.propTypes = {
   checkboxWidth: PropTypes.number.isRequired,
   onSort: PropTypes.func,
   headerCellClassName: PropTypes.string,
+  onResize: PropTypes.func,
+  isResizeColumn: PropTypes.bool,
 };
 export default Columns;
