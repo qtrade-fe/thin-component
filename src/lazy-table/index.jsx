@@ -129,7 +129,7 @@ class LazyTable extends React.Component {
   };
 
   getBoxStyle = (len, y, totalWidth, isEmpty, lazyLoading) => {
-    const { rowHeight } = this.props;
+    const { rowHeight, isScrollX } = this.props;
     const { tableWidth } = this.state;
     const style = {
       paddingTop: rowHeight,
@@ -137,7 +137,7 @@ class LazyTable extends React.Component {
     };
     if (y > rowHeight * len) {
       let addHeight = 0;
-      if (totalWidth > tableWidth) {
+      if (totalWidth > tableWidth && isScrollX) {
         addHeight = 20;
       }
       const f = !isEmpty && lazyLoading ? rowHeight : 0;
@@ -349,6 +349,7 @@ LazyTable.defaultProps = {
   rowCellClassName: '',
   headerCellClassName: '',
   isResizeColumn: true,
+  isScrollX: true,
 };
 LazyTable.propTypes = {
   dataSource: PropTypes.array.isRequired,
@@ -370,5 +371,6 @@ LazyTable.propTypes = {
   rowCellClassName: PropTypes.string,
   headerCellClassName: PropTypes.string,
   isResizeColumn: PropTypes.bool,
+  isScrollX: PropTypes.bool,
 };
 export default LazyTable;
