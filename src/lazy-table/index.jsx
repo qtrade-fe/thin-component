@@ -258,7 +258,7 @@ class LazyTable extends React.Component {
 
     const resizedColumn = this.getResizedColumn(columns);
     const lazyStyle = { maxHeight: y };
-    if (enterColumn) {
+    if (enterColumn && isResizeColumn) {
       lazyStyle.overflow = 'hidden';
     }
 
