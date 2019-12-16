@@ -100,7 +100,11 @@ class Columns extends React.Component {
     if (!isResizeColumn) {
       return null;
     }
-    return <div className="drag-item" />;
+    return (
+      <div className="drag-item">
+        <div />
+      </div>
+    );
   };
 
   render() {
@@ -144,7 +148,7 @@ class Columns extends React.Component {
         const { sorter } = item;
         let spanWidth = item.width - 8;
         if (sorter) {
-          spanWidth = item.width - 8 - 4 - 16;
+          spanWidth = item.width - 8 - 2 - 12;
         }
         const value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
         return (
@@ -168,7 +172,7 @@ class Columns extends React.Component {
                 }
               >
                 <span
-                  style={{ maxWidth: spanWidth - 4, display: 'inline-block' }}
+                  style={{ maxWidth: spanWidth - 2, display: 'inline-block' }}
                   className="column-item-text"
                 >
                   {item.title}

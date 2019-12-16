@@ -180,7 +180,7 @@ class LazyTable extends React.Component {
     if (!copy[index]) {
       copy[index] = 0;
     }
-    const minWidth = 50;
+    const minWidth = 48;
     if (index + 1 < len) {
       if (!copy[index + 1]) {
         copy[index + 1] = 0;

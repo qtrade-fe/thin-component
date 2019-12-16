@@ -38,7 +38,7 @@ class UseTreeDemo extends React.Component {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
-        width: 200,
+        width: 36,
         render(v, r) {
           return <input defaultValue={v} onClick={me.click.bind(me, r)} />;
         },
@@ -47,7 +47,7 @@ class UseTreeDemo extends React.Component {
         title: '年龄',
         dataIndex: 'age',
         key: 'age',
-        width: 200,
+        width: 48,
         sorter: (a, b) => a.age - b.age,
       },
       {
