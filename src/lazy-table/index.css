@@ -149,6 +149,6 @@
   display: flex;
   width: 8px;
   height: 100%;
-  cursor: ew-resize;
+  cursor: col-resize;
   background: rgba(0, 0, 0, 0);
 }
