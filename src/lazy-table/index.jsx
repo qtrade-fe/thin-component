@@ -24,6 +24,7 @@ class LazyTable extends React.Component {
       checkboxWidth: 40,
       tableWidth: 0,
       columnSize: [],
+      enterColumn: false,
     };
   }
 
@@ -217,6 +218,18 @@ class LazyTable extends React.Component {
     return arr;
   };
 
+  onMouseEnter = () => {
+    this.setState({
+      enterColumn: true,
+    });
+  };
+
+  onMouseLeave = () => {
+    this.setState({
+      enterColumn: false,
+    });
+  };
+
   render() {
     const {
       columns,
@@ -234,7 +247,7 @@ class LazyTable extends React.Component {
       isResizeColumn,
     } = this.props;
     const { y } = scroll;
-    const { columnId, tableId, checkboxWidth } = this.state;
+    const { columnId, tableId, checkboxWidth, enterColumn } = this.state;
     const columnStyle = {
       height: rowHeight,
     };
@@ -244,14 +257,22 @@ class LazyTable extends React.Component {
     const boxStyle = this.getBoxStyle(len, y, totalWidth, isEmpty, lazyLoading);
 
     const resizedColumn = this.getResizedColumn(columns);
+    const lazyStyle = { maxHeight: y };
+    if (enterColumn) {
+      lazyStyle.overflow = 'hidden';
+    }
 
     return (
       <div className="lazy-table-table-box-wrap" style={boxStyle}>
-        <div className="lazy-table-table-box" id={tableId} style={{ maxHeight: y }}>
+        <div className="lazy-table-table-box" id={tableId} style={lazyStyle}>
           {this.renderLoading()}
           <div className="table">
             <div className="table-column" id={columnId}>
-              <div className="column-content">
+              <div
+                className="column-content"
+                onMouseEnter={this.onMouseEnter}
+                onMouseLeave={this.onMouseLeave}
+              >
                 <div className="row row-column" style={columnStyle}>
                   <Columns
                     isResizeColumn={isResizeColumn}
