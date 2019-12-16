@@ -4,6 +4,7 @@
 @rowhoverbg: #cce6ff;
 @headerfontcolor: rgba(0, 0, 0, 0.65);
 @rowfontcolor: rgba(0, 0, 0, 0.85);
+
 .lazy-table-table-box-wrap {
   position: relative;
   display: inline-block;
@@ -35,7 +36,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.5);
@@ -74,9 +75,11 @@
     color: @rowfontcolor;
     border-bottom: 1px solid @bordercolor;
   }
+
   .row:hover {
     background: @rowhoverbg;
   }
+
   .row-column:hover {
     background: @headerbg;
   }
@@ -92,7 +95,7 @@
     border-bottom: 0;
   }
 
-  .row > span {
+  .row>span {
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -106,11 +109,11 @@
     height: 100%;
   }
 
-  .row > span:last-child {
+  .row>span:last-child {
     border-right: 0;
   }
 
-  .row > .checkbox {
+  .row>.checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,6 +173,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .drag-item {
     position: relative;
     right: -4px;

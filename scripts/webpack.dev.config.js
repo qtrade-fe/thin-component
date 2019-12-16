@@ -58,25 +58,11 @@ const webpackConfigDev = {
     host: myHost, // 设置0.0.0.0使得可以通过本机ip访问项目
     disableHostCheck: true,
     historyApiFallback: true,
-    port: 8222,
+    port: 8001,
     hot: true,
     open: true,
     // necessary for FriendlyErrorsPlugin
     quiet: true,
-    proxy: {
-      '/qtrade_bond': {
-        target: 'https://test.qtrade.com.cn',
-        changeOrigin: true,
-      },
-      '/qtrade-wss': {
-        target: 'https://test.qtrade.com.cn',
-        changeOrigin: true,
-      },
-      '/qtrade-app-box': {
-        target: 'https://test.qtrade.com.cn',
-        changeOrigin: true,
-      },
-    },
   },
 };
 module.exports = merge(webpackConfigBase, webpackConfigDev);
