@@ -94,7 +94,7 @@
 .lazy-table-table-box .row > .checkbox {
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-left: 13px;
 }
 .lazy-table-table-box .ant-spin.ant-spin-show-text .ant-spin-text {
   font-size: 12px;

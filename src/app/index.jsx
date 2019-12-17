@@ -14,7 +14,7 @@ class UseTreeDemo extends React.Component {
 
   getDataSource = () => {
     const arr = [];
-    for (let i = 0; i < 100; i += 1) {
+    for (let i = 0; i < 200; i += 1) {
       arr.push({
         key: `1${i}`,
         name: `胡彦斌${i}`,
@@ -38,7 +38,7 @@ class UseTreeDemo extends React.Component {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
-        width: 36,
+        width: 50,
         render(v, r) {
           return <input defaultValue={v} onClick={me.click.bind(me, r)} />;
         },
