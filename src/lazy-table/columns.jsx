@@ -54,11 +54,12 @@ class Columns extends React.Component {
     return [...dataSource];
   };
 
-  getIndeterminate = () => {
-    const { rowSelection, dataSource } = this.props;
+  getIndeterminate = checked => {
+    const { rowSelection } = this.props;
     const { selectedRowKeys = [] } = rowSelection;
     const len = selectedRowKeys.length;
-    if (len > 0 && len < dataSource.length) {
+
+    if (!checked && len > 0) {
       return true;
     }
     return false;
@@ -67,12 +68,19 @@ class Columns extends React.Component {
   getCheckboxValue = () => {
     const { rowSelection, dataSource } = this.props;
     const { selectedRowKeys = [] } = rowSelection;
-    const len = selectedRowKeys.length;
     const len2 = dataSource.length;
-    if (len2 > 0 && len >= dataSource.length) {
-      return true;
+    if (len2 === 0) {
+      return false;
     }
-    return false;
+    let flag = true;
+    for (let i = 0; i < len2; i += 1) {
+      const { key } = dataSource[i];
+      if (selectedRowKeys.indexOf(key) === -1) {
+        flag = false;
+        break;
+      }
+    }
+    return flag;
   };
 
   handleSort = (sorter, field) => {
@@ -118,6 +126,7 @@ class Columns extends React.Component {
     } = this.props;
     const { sorterActiveField, sorterDirection } = this.state;
     const arr = [];
+    const checked = this.getCheckboxValue();
     if (rowSelection) {
       arr.push(
         <span
@@ -129,8 +138,8 @@ class Columns extends React.Component {
         >
           <Checkbox
             onChange={this.handleCheckboxChange}
-            indeterminate={this.getIndeterminate()}
-            checked={this.getCheckboxValue()}
+            indeterminate={this.getIndeterminate(checked)}
+            checked={checked}
             disabled={dataSource.length === 0}
           />
         </span>

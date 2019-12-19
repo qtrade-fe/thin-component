@@ -8,13 +8,13 @@ class UseTreeDemo extends React.Component {
     this.state = {
       visible: false,
       dataSource: this.getDataSource(),
-      selectedRowKeys: ['10'],
+      selectedRowKeys: ['1000000'],
     };
   }
 
   getDataSource = () => {
     const arr = [];
-    for (let i = 0; i < 200; i += 1) {
+    for (let i = 0; i < 10; i += 1) {
       arr.push({
         key: `1${i}`,
         name: `胡彦斌${i}`,
