@@ -16,7 +16,7 @@ class Columns extends React.Component {
   }
 
   handleCheckboxChange = e => {
-    const { rowSelection, dataSource } = this.props;
+    const { rowSelection, dataSource, rowKey } = this.props;
     const { checked } = e.target;
 
     const { onChange = () => {}, onSelectAll = () => {}, selectedRowKeys = [] } = rowSelection;
@@ -24,7 +24,7 @@ class Columns extends React.Component {
     let selectedRows = [];
     if (checked) {
       tem = dataSource.map(item => {
-        return item.key;
+        return item[rowKey];
       });
       selectedRows = [...dataSource];
     }
@@ -35,8 +35,9 @@ class Columns extends React.Component {
   };
 
   getChangeRows = (dataSource, checked, selectedRowKeys) => {
+    const { rowKey } = this.props;
     const allKeys = dataSource.map(item => {
-      return item.key;
+      return item[rowKey];
     });
     const changeRows = [];
     const len = allKeys.length;
@@ -48,7 +49,7 @@ class Columns extends React.Component {
         }
       }
       return dataSource.filter(item => {
-        return changeRows.indexOf(item.key) > -1;
+        return changeRows.indexOf(item[rowKey]) > -1;
       });
     }
     return [...dataSource];
@@ -66,7 +67,7 @@ class Columns extends React.Component {
   };
 
   getCheckboxValue = () => {
-    const { rowSelection, dataSource } = this.props;
+    const { rowSelection, dataSource, rowKey } = this.props;
     const { selectedRowKeys = [] } = rowSelection;
     const len2 = dataSource.length;
     if (len2 === 0) {
@@ -74,7 +75,7 @@ class Columns extends React.Component {
     }
     let flag = true;
     for (let i = 0; i < len2; i += 1) {
-      const { key } = dataSource[i];
+      const key = dataSource[i][rowKey];
       if (selectedRowKeys.indexOf(key) === -1) {
         flag = false;
         break;
@@ -192,7 +193,7 @@ class Columns extends React.Component {
           </Resizable>
         );
       }),
-      <span style={{ width: 50 }} key="item.key" />
+      <span style={{ width: 50 }} key="item.key.Columns.lazy" />
     );
   }
 }
@@ -213,5 +214,6 @@ Columns.propTypes = {
   headerCellClassName: PropTypes.string,
   onResize: PropTypes.func,
   isResizeColumn: PropTypes.bool,
+  rowKey: PropTypes.string.isRequired,
 };
 export default Columns;

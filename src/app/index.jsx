@@ -8,7 +8,7 @@ class UseTreeDemo extends React.Component {
     this.state = {
       visible: false,
       dataSource: this.getDataSource(),
-      selectedRowKeys: ['1000000'],
+      selectedRowKeys: ['11'],
     };
   }
 
@@ -16,7 +16,7 @@ class UseTreeDemo extends React.Component {
     const arr = [];
     for (let i = 0; i < 10; i += 1) {
       arr.push({
-        key: `1${i}`,
+        id: `1${i}`,
         name: `胡彦斌${i}`,
         age: i,
         address: `西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号${i}`,
@@ -129,7 +129,7 @@ class UseTreeDemo extends React.Component {
           dataSource={dataSource}
           columns={this.getColumns()}
           scroll={{ y: 325 }}
-          rowKey="key"
+          rowKey="id"
           lazyLoading={false}
           onScrollBottom={() => {}}
           isResizeColumn
