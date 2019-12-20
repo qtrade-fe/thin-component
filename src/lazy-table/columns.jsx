@@ -84,7 +84,7 @@ class Columns extends React.Component {
     return flag;
   };
 
-  handleSort = (sorter, field) => {
+  handleSort = (sorter, field, item) => {
     const { sorterDirection } = this.state;
     const { onSort } = this.props;
     let direction = 'default';
@@ -100,7 +100,7 @@ class Columns extends React.Component {
         sorterActiveField: field,
         sorterDirection: direction,
       });
-      onSort(sorter, direction);
+      onSort(sorter, direction, item);
     }
   };
 
@@ -174,7 +174,7 @@ class Columns extends React.Component {
           >
             <span style={spanStyle}>
               <div
-                onClick={this.handleSort.bind(this, sorter, item.dataIndex)}
+                onClick={this.handleSort.bind(this, sorter, item.dataIndex, item)}
                 className={
                   sorter
                     ? `column-item column-has-sorter ${headerCellClassName}`

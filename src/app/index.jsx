@@ -38,7 +38,7 @@ class UseTreeDemo extends React.Component {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
-        width: 50,
+        width: 200,
         render(v, r) {
           return <input defaultValue={v} onClick={me.click.bind(me, r)} />;
         },
@@ -70,6 +70,14 @@ class UseTreeDemo extends React.Component {
         width: 200,
       },
     ];
+  };
+
+  handleOnChange = (pagination, filters, sorter, extra) => {
+    console.log(pagination); // 不支持
+    console.log(filters); // 不支持
+    console.log(sorter); // 支持
+    console.log(extra); // 不支持
+    console.log('handleOnChange');
   };
 
   render() {
@@ -107,6 +115,7 @@ class UseTreeDemo extends React.Component {
           搜索
         </div>
         <LazyTable
+          onChange={this.handleOnChange}
           // loadingElement={<div>哈哈哈佳佳...</div>}
           loading={false}
           onCell={() => {
