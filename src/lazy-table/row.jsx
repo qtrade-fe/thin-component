@@ -51,6 +51,12 @@ class Row extends React.Component {
     return false;
   };
 
+  defaultCheckboxProps = () => {
+    return {
+      disabled: false,
+    };
+  };
+
   renderRowHtml = () => {
     const {
       rowKey,
@@ -63,6 +69,8 @@ class Row extends React.Component {
     } = this.props;
     const arr = [];
     if (rowSelection) {
+      const { getCheckboxProps = this.defaultCheckboxProps } = rowSelection;
+      const checkboxProps = getCheckboxProps(data);
       arr.push(
         <span
           className="checkbox"
@@ -71,7 +79,11 @@ class Row extends React.Component {
             width: checkboxWidth,
           }}
         >
-          <Checkbox onChange={this.handleCheckboxChange} checked={this.getCheckboxValue()} />
+          <Checkbox
+            onChange={this.handleCheckboxChange}
+            checked={this.getCheckboxValue()}
+            {...checkboxProps}
+          />
         </span>
       );
     }

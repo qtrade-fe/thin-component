@@ -19,19 +19,50 @@ class Columns extends React.Component {
     const { rowSelection, dataSource, rowKey } = this.props;
     const { checked } = e.target;
 
-    const { onChange = () => {}, onSelectAll = () => {}, selectedRowKeys = [] } = rowSelection;
-    let tem = [];
+    const {
+      onChange = () => {},
+      onSelectAll = () => {},
+      selectedRowKeys = [],
+      getCheckboxProps = this.defaultCheckboxProp,
+    } = rowSelection;
+    const dataSourceCopy = dataSource.filter(item => {
+      if (selectedRowKeys.indexOf(item[rowKey]) !== -1) {
+        return checked;
+      }
+      const { disabled } = getCheckboxProps(item);
+      return !disabled;
+    });
+
+    let selectedRowKeysCopy = [];
     let selectedRows = [];
     if (checked) {
-      tem = dataSource.map(item => {
+      selectedRowKeysCopy = dataSourceCopy.map(item => {
         return item[rowKey];
       });
-      selectedRows = [...dataSource];
+      selectedRows = [...dataSourceCopy];
+      onChange(selectedRowKeysCopy, selectedRows);
+      const changeRows = this.getChangeRows(dataSourceCopy, checked, selectedRowKeys);
+      onSelectAll(checked, selectedRows, changeRows);
+    } else {
+      selectedRowKeysCopy = [];
+      selectedRows = dataSource.filter(item => {
+        const { disabled } = getCheckboxProps(item);
+        if (selectedRowKeys.indexOf(item[rowKey]) !== -1 && disabled) {
+          selectedRowKeysCopy.push(item[rowKey]);
+          return true;
+        }
+        return false;
+      });
+      const changeRows = dataSource.filter(item => {
+        const { disabled } = getCheckboxProps(item);
+        if (!disabled) {
+          return true;
+        }
+        return false;
+      });
+      onChange(selectedRowKeysCopy, selectedRows);
+      onSelectAll(checked, selectedRows, changeRows);
     }
-
-    onChange(tem, selectedRows);
-    const changeRows = this.getChangeRows(dataSource, checked, selectedRowKeys);
-    onSelectAll(checked, selectedRows, changeRows);
   };
 
   getChangeRows = (dataSource, checked, selectedRowKeys) => {
@@ -66,19 +97,28 @@ class Columns extends React.Component {
     return false;
   };
 
+  defaultCheckboxProps = () => {
+    return {
+      disabled: false,
+    };
+  };
+
   getCheckboxValue = () => {
     const { rowSelection, dataSource, rowKey } = this.props;
-    const { selectedRowKeys = [] } = rowSelection;
+    const { selectedRowKeys = [], getCheckboxProps = this.defaultCheckboxProps } = rowSelection;
     const len2 = dataSource.length;
     if (len2 === 0) {
       return false;
     }
     let flag = true;
     for (let i = 0; i < len2; i += 1) {
-      const key = dataSource[i][rowKey];
-      if (selectedRowKeys.indexOf(key) === -1) {
-        flag = false;
-        break;
+      const checkboxProps = getCheckboxProps(dataSource[i]);
+      if (!checkboxProps.disabled) {
+        const key = dataSource[i][rowKey];
+        if (selectedRowKeys.indexOf(key) === -1) {
+          flag = false;
+          break;
+        }
       }
     }
     return flag;

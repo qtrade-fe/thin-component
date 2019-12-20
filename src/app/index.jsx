@@ -6,9 +6,8 @@ class UseTreeDemo extends React.Component {
   constructor() {
     super();
     this.state = {
-      visible: false,
       dataSource: this.getDataSource(),
-      selectedRowKeys: ['11'],
+      selectedRowKeys: ['11', '12'],
     };
   }
 
@@ -97,7 +96,7 @@ class UseTreeDemo extends React.Component {
   };
 
   render() {
-    const { visible, dataSource, selectedRowKeys } = this.state;
+    const { dataSource, selectedRowKeys } = this.state;
     const rowSelection = {
       onChange: (s1, selectedRows) => {
         console.log(`selectedRowKeys: ${s1}`, 'selectedRows: ', selectedRows);
@@ -115,21 +114,15 @@ class UseTreeDemo extends React.Component {
         console.log(selected);
         console.log(selectedRows);
         console.log(changeRows);
-        console.log('alll---');
+        console.log('onSelectAll---');
       },
       selectedRowKeys,
+      getCheckboxProps: record => ({
+        disabled: record.age === 2 || record.age === 5, // Column configuration not to be checked
+      }),
     };
     return (
       <div className="box">
-        <div
-          onClick={() => {
-            this.setState({
-              visible: !visible,
-            });
-          }}
-        >
-          搜索
-        </div>
         <LazyTable
           onChange={this.handleOnChange}
           // loadingElement={<div>哈哈哈佳佳...</div>}
