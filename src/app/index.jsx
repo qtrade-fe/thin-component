@@ -42,6 +42,14 @@ class UseTreeDemo extends React.Component {
         render(v, r) {
           return <input defaultValue={v} onClick={me.click.bind(me, r)} />;
         },
+        renderTitle: (title, column) => {
+          return (
+            <span>
+              {title}.{column.dataIndex}
+              <span style={{ color: 'red' }}>*点</span>
+            </span>
+          );
+        },
       },
       {
         title: '年龄',
@@ -55,6 +63,14 @@ class UseTreeDemo extends React.Component {
         dataIndex: 'gender',
         key: 'gender',
         width: 200,
+        renderTitle: title => {
+          return (
+            <span>
+              {title}
+              <span style={{ color: 'red' }}>*加</span>
+            </span>
+          );
+        },
       },
       {
         title: '住址',

@@ -161,6 +161,7 @@ class Columns extends React.Component {
           spanWidth = item.width - 8 - 2 - 12;
         }
         const value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
+        const title = item.renderTitle ? item.renderTitle(item.title, item) : item.title;
         return (
           <Resizable
             key={item.key}
@@ -185,7 +186,7 @@ class Columns extends React.Component {
                   style={{ maxWidth: spanWidth - 2, display: 'inline-block' }}
                   className="column-item-text"
                 >
-                  {item.title}
+                  {title}
                 </span>
                 {sorter ? <Sorter value={value} /> : null}
               </div>
