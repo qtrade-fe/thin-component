@@ -23,7 +23,7 @@ class Columns extends React.Component {
       onChange = () => {},
       onSelectAll = () => {},
       selectedRowKeys = [],
-      getCheckboxProps = this.defaultCheckboxProp,
+      getCheckboxProps = this.defaultCheckboxProps,
     } = rowSelection;
     const dataSourceCopy = dataSource.filter(item => {
       if (selectedRowKeys.indexOf(item[rowKey]) !== -1) {
