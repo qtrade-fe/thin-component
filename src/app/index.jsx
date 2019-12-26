@@ -143,7 +143,6 @@ class UseTreeDemo extends React.Component {
           }}
           loadingTip="加载中..."
           rowHeight={40}
-          rowSelection={rowSelection}
           dataSource={dataSource}
           columns={this.getColumns()}
           scroll={{ y: 325 }}

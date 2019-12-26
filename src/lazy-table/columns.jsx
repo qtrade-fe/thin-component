@@ -24,7 +24,7 @@ class Columns extends React.Component {
       onSelectAll = () => {},
       selectedRowKeys = [],
       getCheckboxProps = this.defaultCheckboxProps,
-    } = rowSelection;
+    } = rowSelection || {};
     const dataSourceCopy = dataSource.filter(item => {
       if (selectedRowKeys.indexOf(item[rowKey]) !== -1) {
         return checked;
@@ -88,7 +88,7 @@ class Columns extends React.Component {
 
   getIndeterminate = checked => {
     const { rowSelection } = this.props;
-    const { selectedRowKeys = [] } = rowSelection;
+    const { selectedRowKeys = [] } = rowSelection || {};
     const len = selectedRowKeys.length;
 
     if (!checked && len > 0) {
@@ -105,7 +105,8 @@ class Columns extends React.Component {
 
   getCheckboxValue = () => {
     const { rowSelection, dataSource, rowKey } = this.props;
-    const { selectedRowKeys = [], getCheckboxProps = this.defaultCheckboxProps } = rowSelection;
+    const { selectedRowKeys = [], getCheckboxProps = this.defaultCheckboxProps } =
+      rowSelection || {};
     const len2 = dataSource.length;
     if (len2 === 0) {
       return false;
