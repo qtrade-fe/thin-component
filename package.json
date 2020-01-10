@@ -1,6 +1,6 @@
 {
   "name": "thin-component",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "lazy table for react component",
   "keywords": [
     "ant",
