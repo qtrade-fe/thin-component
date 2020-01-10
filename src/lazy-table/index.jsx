@@ -41,7 +41,9 @@ class LazyTable extends React.Component {
   componentWillUnmount() {
     const { tableId } = this.state;
     const tableDom = document.getElementById(tableId);
-    tableDom.onscroll = null;
+    if (tableDom) {
+      tableDom.onscroll = null;
+    }
     window.removeEventListener('resize', this.windowResize);
   }
 
