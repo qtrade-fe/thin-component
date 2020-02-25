@@ -126,7 +126,14 @@ class Columns extends React.Component {
   };
 
   handleSort = (sorter, field, item) => {
-    const { sorterDirection } = this.state;
+    const { sorterDirection: sorterDirection0 } = this.state;
+    let sorterDirection;
+    const val = this.getSortValue(item);
+    if (val) {
+      sorterDirection = val;
+    } else {
+      sorterDirection = sorterDirection0;
+    }
     const { onSort } = this.props;
     let direction = 'default';
     if (sorterDirection === 'up') {
@@ -157,6 +164,20 @@ class Columns extends React.Component {
     );
   };
 
+  getSortValue = item => {
+    const value = null;
+    if (typeof item.sortOrder === 'boolean' && item.sortOrder === false) {
+      return 'default';
+    }
+    if (typeof item.sortOrder === 'string') {
+      if (item.sortOrder === 'ascend') {
+        return 'up';
+      }
+      return 'down';
+    }
+    return value;
+  };
+
   render() {
     const {
       columns,
@@ -165,7 +186,6 @@ class Columns extends React.Component {
       checkboxWidth,
       headerCellClassName,
       onResize,
-      resetSort,
     } = this.props;
     const { sorterActiveField, sorterDirection } = this.state;
     const arr = [];
@@ -202,10 +222,15 @@ class Columns extends React.Component {
         if (sorter) {
           spanWidth = item.width - 8 - 2 - 12;
         }
-        let value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
-        if (resetSort) {
-          value = 'default';
+
+        let value;
+        const val = this.getSortValue(item);
+        if (val) {
+          value = val;
+        } else {
+          value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
         }
+
         const title = item.renderTitle ? item.renderTitle(item.title, item) : item.title;
         return (
           <Resizable

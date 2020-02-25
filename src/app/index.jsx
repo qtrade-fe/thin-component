@@ -8,6 +8,7 @@ class UseTreeDemo extends React.Component {
     this.state = {
       dataSource: this.getDataSource(),
       selectedRowKeys: ['11', '12'],
+      sortOrder: false,
     };
   }
 
@@ -31,6 +32,7 @@ class UseTreeDemo extends React.Component {
   };
 
   getColumns = () => {
+    const { sortOrder } = this.state;
     const me = this;
     return [
       {
@@ -56,6 +58,7 @@ class UseTreeDemo extends React.Component {
         key: 'age',
         width: 48,
         sorter: (a, b) => a.age - b.age,
+        sortOrder,
       },
       {
         title: 'gender',
@@ -123,8 +126,17 @@ class UseTreeDemo extends React.Component {
     };
     return (
       <div className="box">
+        <div
+          onClick={() => {
+            this.setState({
+              sortOrder: 'descend',
+            });
+          }}
+        >
+          hh
+        </div>
         <LazyTable
-          rowSelection={rowSelection}
+          // rowSelection={rowSelection}
           resetSort={false}
           onChange={this.handleOnChange}
           // loadingElement={<div>哈哈哈佳佳...</div>}

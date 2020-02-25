@@ -156,7 +156,7 @@ class LazyTable extends React.Component {
       currentSorter: sorter,
       currentDirection: direction,
     });
-    const { onChange, resetSort } = this.props;
+    const { onChange } = this.props;
     // pagination, filters, sorter, extra
     const orderMap = {
       default: undefined,
@@ -168,7 +168,7 @@ class LazyTable extends React.Component {
       {},
       {
         column,
-        order: resetSort ? undefined : orderMap[direction],
+        order: orderMap[direction],
         field: column.dataIndex,
         columnKey: column.key,
       },
@@ -178,10 +178,7 @@ class LazyTable extends React.Component {
 
   getSortedDataSource = dataSource => {
     const { currentSorter, currentDirection } = this.state;
-    const { resetSort } = this.props;
-    if (resetSort) {
-      return dataSource;
-    }
+
     const copyData = [...dataSource];
     if (currentSorter) {
       if (currentDirection === 'default') {
@@ -256,7 +253,6 @@ class LazyTable extends React.Component {
       rowCellClassName,
       headerCellClassName,
       isResizeColumn,
-      resetSort,
     } = this.props;
     const { y } = scroll;
     const { columnId, tableId, checkboxWidth, enterColumn } = this.state;
@@ -296,7 +292,6 @@ class LazyTable extends React.Component {
                     dataSource={dataSource}
                     rowKey={rowKey}
                     onSort={this.handleSort}
-                    resetSort={resetSort}
                   />
                 </div>
               </div>
@@ -364,7 +359,6 @@ LazyTable.defaultProps = {
   isResizeColumn: true,
   isScrollX: true,
   onChange: () => {},
-  resetSort: false,
 };
 LazyTable.propTypes = {
   dataSource: PropTypes.array.isRequired,
@@ -388,6 +382,5 @@ LazyTable.propTypes = {
   isResizeColumn: PropTypes.bool,
   isScrollX: PropTypes.bool,
   onChange: PropTypes.func,
-  resetSort: PropTypes.bool,
 };
 export default LazyTable;
