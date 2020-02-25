@@ -165,6 +165,7 @@ class Columns extends React.Component {
       checkboxWidth,
       headerCellClassName,
       onResize,
+      resetSort,
     } = this.props;
     const { sorterActiveField, sorterDirection } = this.state;
     const arr = [];
@@ -201,7 +202,10 @@ class Columns extends React.Component {
         if (sorter) {
           spanWidth = item.width - 8 - 2 - 12;
         }
-        const value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
+        let value = sorterActiveField === item.dataIndex ? sorterDirection : 'default';
+        if (resetSort) {
+          value = 'default';
+        }
         const title = item.renderTitle ? item.renderTitle(item.title, item) : item.title;
         return (
           <Resizable
