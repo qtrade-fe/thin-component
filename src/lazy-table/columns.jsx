@@ -87,9 +87,9 @@ class Columns extends React.Component {
   };
 
   getIndeterminate = checked => {
-    const { rowSelection } = this.props;
-    const { selectedRowKeys = [] } = rowSelection || {};
-    const len = selectedRowKeys.length;
+    // const { rowSelection } = this.props;
+    // const { selectedRowKeys = [] } = rowSelection || {};
+    const len = this.getNotDisabledKeyLength();
 
     if (!checked && len > 0) {
       return true;
@@ -178,6 +178,44 @@ class Columns extends React.Component {
     return value;
   };
 
+  getNotDisabledKeyLength = () => {
+    const { dataSource, rowKey, rowSelection } = this.props;
+
+    const { selectedRowKeys = [], getCheckboxProps = this.defaultCheckboxProps } =
+      rowSelection || {};
+
+    let len = selectedRowKeys.length;
+
+    for (let i = 0; i < dataSource.length; i += 1) {
+      const item = getCheckboxProps(dataSource[i]);
+      if (item.disabled && selectedRowKeys.indexOf(dataSource[i][rowKey]) > -1) {
+        len -= 1;
+      }
+    }
+    return len;
+  };
+
+  isDisableAll = (rowSelection, dataSource) => {
+    if (dataSource.length === 0) {
+      return true;
+    }
+    if (rowSelection && rowSelection.getCheckboxProps) {
+      let flag = true;
+      const fn = rowSelection.getCheckboxProps;
+
+      for (let i = 0; i < dataSource.length; i += 1) {
+        const item = fn(dataSource[i]);
+        if (!item.disabled) {
+          flag = false;
+          break;
+        }
+      }
+
+      return flag;
+    }
+    return false;
+  };
+
   render() {
     const {
       columns,
@@ -203,7 +241,7 @@ class Columns extends React.Component {
             onChange={this.handleCheckboxChange}
             indeterminate={this.getIndeterminate(checked)}
             checked={checked}
-            disabled={dataSource.length === 0}
+            disabled={this.isDisableAll(rowSelection, dataSource)}
           />
         </span>
       );
