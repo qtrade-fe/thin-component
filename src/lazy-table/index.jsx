@@ -140,7 +140,7 @@ class LazyTable extends React.Component {
     if (y > rowHeight * len) {
       let addHeight = 0;
       if (totalWidth > tableWidth && isScrollX) {
-        addHeight = 10;
+        addHeight = 14;
       }
       const f = !isEmpty && lazyLoading ? rowHeight : 0;
       style.height = rowHeight * len + rowHeight + addHeight + f;
@@ -268,6 +268,9 @@ class LazyTable extends React.Component {
     const lazyStyle = { maxHeight: y };
     if (enterColumn && isResizeColumn) {
       lazyStyle.overflow = 'hidden';
+      if (isEmpty) {
+        lazyStyle.height = y;
+      }
     }
 
     return (
