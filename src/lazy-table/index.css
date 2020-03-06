@@ -5,6 +5,7 @@
   overflow: hidden;
   font-size: 12px;
   border: 1px solid #d1d8de;
+  box-sizing: border-box;
 }
 .lazy-table-table-box {
   display: inline-block;
@@ -104,6 +105,14 @@
   align-items: center;
   justify-content: center;
   height: 200px;
+  position: relative;
+}
+.lazy-table-table-box .empty-box-none-select {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 .lazy-table-table-box .sort-box {
   position: relative;

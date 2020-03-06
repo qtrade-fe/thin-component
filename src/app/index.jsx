@@ -136,7 +136,7 @@ class UseTreeDemo extends React.Component {
           hh
         </div>
         <LazyTable
-          // rowSelection={rowSelection}
+          rowSelection={rowSelection}
           resetSort={false}
           onChange={this.handleOnChange}
           // loadingElement={<div>哈哈哈佳佳...</div>}

@@ -13,6 +13,7 @@ class MyEmpty extends React.Component {
     const { y } = this.props;
     return (
       <div className="empty-box" style={{ height: y - 20 }}>
+        <div className="empty-box-none-select" />
         <Empty
           image={pic}
           imageStyle={{

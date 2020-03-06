@@ -12,6 +12,7 @@
   overflow: hidden;
   font-size: @fontsize;
   border: 1px solid @bordercolor;
+  box-sizing: border-box;
 }
 
 .lazy-table-table-box {
@@ -129,6 +130,14 @@
     align-items: center;
     justify-content: center;
     height: 200px;
+    position: relative;
+  }
+  .empty-box-none-select {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
 
   .sort-box {

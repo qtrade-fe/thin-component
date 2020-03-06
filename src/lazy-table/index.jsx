@@ -140,7 +140,7 @@ class LazyTable extends React.Component {
     if (y > rowHeight * len) {
       let addHeight = 0;
       if (totalWidth > tableWidth && isScrollX) {
-        addHeight = 20;
+        addHeight = 10;
       }
       const f = !isEmpty && lazyLoading ? rowHeight : 0;
       style.height = rowHeight * len + rowHeight + addHeight + f;
