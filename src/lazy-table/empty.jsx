@@ -9,10 +9,34 @@ class MyEmpty extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize = () => {
+    const { myref } = this.props;
+    setTimeout(() => {
+      if (this.div && myref.myref) {
+        this.div.style.width = `${myref.myref.clientWidth}px`;
+      }
+    });
+  };
+
   render() {
     const { y } = this.props;
     return (
-      <div className="empty-box" style={{ height: y - 20 }}>
+      <div
+        className="empty-box"
+        style={{ height: y - 20 }}
+        ref={ref => {
+          this.div = ref;
+        }}
+      >
         <div className="empty-box-none-select" />
         <Empty
           image={pic}

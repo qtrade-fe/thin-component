@@ -271,7 +271,13 @@ class LazyTable extends React.Component {
     }
 
     return (
-      <div className="lazy-table-table-box-wrap" style={boxStyle}>
+      <div
+        className="lazy-table-table-box-wrap"
+        style={boxStyle}
+        ref={ref => {
+          this.myref = ref;
+        }}
+      >
         <div className="lazy-table-table-box" id={tableId} style={lazyStyle}>
           {this.renderLoading()}
           <div className="table">
@@ -299,7 +305,7 @@ class LazyTable extends React.Component {
 
             {isEmpty ? (
               <div style={{ width: totalWidth }}>
-                <MyEmpty y={y} />
+                <MyEmpty y={y} myref={this} />
               </div>
             ) : null}
 

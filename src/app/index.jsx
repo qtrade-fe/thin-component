@@ -14,7 +14,7 @@ class UseTreeDemo extends React.Component {
 
   getDataSource = () => {
     const arr = [];
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < 0; i += 1) {
       arr.push({
         id: `1${i}`,
         name: `胡彦斌${i}`,
