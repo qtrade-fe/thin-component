@@ -22,7 +22,14 @@ class MyEmpty extends React.Component {
     const { myref } = this.props;
     setTimeout(() => {
       if (this.div && myref.myref) {
-        this.div.style.width = `${myref.myref.clientWidth}px`;
+        const width = myref.myref.clientWidth;
+        if (width < 1) {
+          setTimeout(() => {
+            this.resize();
+          }, 1200);
+        } else {
+          this.div.style.width = `${width}px`;
+        }
       }
     });
   };
