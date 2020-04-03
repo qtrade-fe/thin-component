@@ -25,14 +25,19 @@ class LazyTable extends React.Component {
       tableWidth: 0,
       columnSize: [],
       enterColumn: false,
+      offsetWidth: 0,
+      scrollLeft: 0,
     };
   }
 
   componentDidMount() {
     const { tableId } = this.state;
     const tableDom = document.getElementById(tableId);
+    const { offsetWidth, scrollLeft } = tableDom;
     this.setState({
-      tableWidth: tableDom.offsetWidth,
+      tableWidth: offsetWidth,
+      offsetWidth,
+      scrollLeft,
     });
     tableDom.onscroll = this.handleScroll;
     window.addEventListener('resize', this.windowResize);
@@ -61,12 +66,14 @@ class LazyTable extends React.Component {
     const { onScrollBottom, bottomLimit, lazyLoading } = this.props;
     const { columnId } = this.state;
     const columnDom = document.getElementById(columnId);
-    const { scrollTop, scrollLeft, scrollHeight, offsetHeight } = e.target;
+    const { scrollTop, scrollLeft, scrollHeight, offsetHeight, offsetWidth } = e.target;
     columnDom.style.left = `${-e.target.scrollLeft}px`;
     this.setState({
       scrollTop,
       loadingLeft: scrollLeft,
       loadingTop: scrollTop,
+      offsetWidth,
+      scrollLeft,
     });
     const val = scrollHeight - scrollTop - offsetHeight;
     if (val < bottomLimit) {
@@ -255,7 +262,7 @@ class LazyTable extends React.Component {
       isResizeColumn,
     } = this.props;
     const { y } = scroll;
-    const { columnId, tableId, checkboxWidth, enterColumn } = this.state;
+    const { columnId, tableId, checkboxWidth, enterColumn, offsetWidth, scrollLeft } = this.state;
     const columnStyle = {
       height: rowHeight,
     };
@@ -328,6 +335,8 @@ class LazyTable extends React.Component {
                   height={rowHeight}
                   columns={resizedColumn}
                   rowKey={rowKey}
+                  offsetWidth={offsetWidth}
+                  scrollLeft={scrollLeft}
                 />
               );
             })}

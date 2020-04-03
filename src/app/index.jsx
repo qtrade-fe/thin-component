@@ -2,6 +2,7 @@ import React from 'react';
 import './index.less';
 import LazyTable from '../lazy-table';
 
+const schoolCount = 200;
 class UseTreeDemo extends React.Component {
   constructor() {
     super();
@@ -14,15 +15,20 @@ class UseTreeDemo extends React.Component {
 
   getDataSource = () => {
     const arr = [];
-    for (let i = 0; i < 0; i += 1) {
-      arr.push({
+    for (let i = 0; i < 2000; i += 1) {
+      const obj = {
         id: `1${i}`,
         name: `胡彦斌${i}`,
         age: i,
         address: `西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号${i}`,
         school: `杭州${i}`,
         gender: '男',
-      });
+      };
+      arr.push(obj);
+      for (let j = 0; j < schoolCount; j += 1) {
+        obj[`school${j}`] = `${i}-school-${j}`;
+      }
+      // schoolCount
     }
     return arr;
   };
@@ -34,7 +40,7 @@ class UseTreeDemo extends React.Component {
   getColumns = () => {
     const { sortOrder } = this.state;
     const me = this;
-    return [
+    const arr = [
       {
         title: '姓名',
         dataIndex: 'name',
@@ -88,6 +94,15 @@ class UseTreeDemo extends React.Component {
         width: 200,
       },
     ];
+    for (let i = 0; i < schoolCount; i += 1) {
+      arr.push({
+        title: `学校${i}`,
+        dataIndex: `school${i}`,
+        key: `school${i}`,
+        width: 200,
+      });
+    }
+    return arr;
   };
 
   handleOnChange = (pagination, filters, sorter, extra) => {

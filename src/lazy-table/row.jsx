@@ -57,16 +57,35 @@ class Row extends React.Component {
     };
   };
 
+  getCurrentColumnsWidth = () => {
+    const { columns } = this.props;
+    const len = columns.length;
+    const arr = [];
+    let total = 0;
+    for (let i = 0; i < len; i += 1) {
+      const item = columns[i];
+      arr.push({
+        ...item,
+        currentWidth: total,
+      });
+      total += item.width;
+    }
+    return arr;
+  };
+
   renderRowHtml = () => {
     const {
       rowKey,
       data,
-      columns,
+      // columns,
       rowSelection,
       checkboxWidth,
       onCellObj,
       rowCellClassName,
+      offsetWidth,
+      scrollLeft,
     } = this.props;
+    const columns = this.getCurrentColumnsWidth();
     const arr = [];
     if (rowSelection) {
       const { getCheckboxProps = this.defaultCheckboxProps } = rowSelection;
@@ -89,25 +108,30 @@ class Row extends React.Component {
     }
 
     const htmlArr = columns.map((item, index) => {
+      const { currentWidth } = item;
       const spanStyle = {
         width: item.width,
       };
       const key = `${item[rowKey]}u${index}`;
+      const widthDt = currentWidth - scrollLeft;
 
-      if (item.render) {
+      if (widthDt <= offsetWidth + item.width && widthDt >= -offsetWidth) {
+        if (item.render) {
+          return (
+            <span style={spanStyle} key={key} {...onCellObj}>
+              <div className={`span-item ${rowCellClassName}`}>
+                {item.render(data[item.dataIndex], data)}
+              </div>
+            </span>
+          );
+        }
         return (
           <span style={spanStyle} key={key} {...onCellObj}>
-            <div className={`span-item ${rowCellClassName}`}>
-              {item.render(data[item.dataIndex], data)}
-            </div>
+            <div className={`span-item ${rowCellClassName}`}>{data[item.dataIndex]}</div>
           </span>
         );
       }
-      return (
-        <span style={spanStyle} key={key} {...onCellObj}>
-          <div className={`span-item ${rowCellClassName}`}>{data[item.dataIndex]}</div>
-        </span>
-      );
+      return <span style={spanStyle} key={key} />;
     });
     return arr.concat(htmlArr);
   };
