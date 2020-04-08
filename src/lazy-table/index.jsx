@@ -59,11 +59,16 @@ class LazyTable extends React.Component {
       this.setState({
         tableWidth: tableDom.offsetWidth,
       });
-      this.handleScroll({ target: tableDom });
+      setTimeout(() => {
+        if (tableDom) {
+          this.handleScroll({ target: tableDom });
+        }
+      }, 10);
     }
   };
 
   handleScroll = e => {
+    console.log('thin-component 3.1.4');
     const { onScrollBottom, bottomLimit, lazyLoading } = this.props;
     const { columnId } = this.state;
     const columnDom = document.getElementById(columnId);
