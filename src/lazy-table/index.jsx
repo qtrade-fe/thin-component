@@ -59,6 +59,7 @@ class LazyTable extends React.Component {
       this.setState({
         tableWidth: tableDom.offsetWidth,
       });
+      this.handleScroll({ target: tableDom });
     }
   };
 
