@@ -75,6 +75,7 @@ class LazyTable extends React.Component {
       loadingTop: scrollTop,
       offsetWidth,
       scrollLeft,
+      tableWidth: offsetWidth,
     });
     const val = scrollHeight - scrollTop - offsetHeight;
     if (val < bottomLimit) {
