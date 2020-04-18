@@ -240,18 +240,6 @@ class LazyTable extends React.Component {
     return arr;
   };
 
-  onMouseEnter = () => {
-    this.setState({
-      enterColumn: true,
-    });
-  };
-
-  onMouseLeave = () => {
-    this.setState({
-      enterColumn: false,
-    });
-  };
-
   render() {
     const {
       columns,
@@ -299,11 +287,7 @@ class LazyTable extends React.Component {
           {this.renderLoading()}
           <div className="table">
             <div className="table-column" id={columnId}>
-              <div
-                className="column-content"
-                onMouseEnter={this.onMouseEnter}
-                onMouseLeave={this.onMouseLeave}
-              >
+              <div className="column-content">
                 <div className="row row-column" style={columnStyle}>
                   <Columns
                     isResizeColumn={isResizeColumn}
