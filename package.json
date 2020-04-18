@@ -1,6 +1,6 @@
 {
   "name": "thin-component",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "description": "lazy table for react component",
   "keywords": [
     "ant",
@@ -35,11 +35,6 @@
     "less": "lessc ./src/lazy-table/index.less ./src/lazy-table/index.css"
   },
   "author": "easyvalley",
-  "babel": {
-    "presets": [
-      "./.babelrc.js"
-    ]
-  },
   "module": "src/index.js",
   "devDependencies": {
     "babel-core": "~6.26.0",
