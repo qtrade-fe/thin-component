@@ -178,6 +178,7 @@ class UseTreeDemo extends React.Component {
           rowKey="id"
           lazyLoading={false}
           onScrollBottom={() => {}}
+          onWidthResize={null}
           isResizeColumn
         />
       </div>

@@ -24,7 +24,6 @@ class LazyTable extends React.Component {
       checkboxWidth: 40,
       tableWidth: 0,
       columnSize: [],
-      enterColumn: false,
       offsetWidth: 0,
       scrollLeft: 0,
     };
@@ -206,8 +205,14 @@ class LazyTable extends React.Component {
     return dataSource;
   };
 
+  resetWidth = () => {
+    this.setState({
+      columnSize: [],
+    });
+  };
+
   handleResizeColumn = (e, index, { size }) => {
-    const { columns } = this.props;
+    const { columns, onWidthResize } = this.props;
     const { columnSize } = this.state;
     const copy = [...columnSize];
     if (!copy[index]) {
@@ -220,9 +225,18 @@ class LazyTable extends React.Component {
       copy[index] = bf;
     }
 
-    this.setState({
-      columnSize: copy,
-    });
+    this.setState(
+      {
+        columnSize: copy,
+      },
+      () => {
+        const { columns: columns2 } = this.props;
+        if (onWidthResize) {
+          const resizedColumn = this.getResizedColumn(columns2);
+          onWidthResize(resizedColumn);
+        }
+      }
+    );
   };
 
   getResizedColumn = columns => {
@@ -257,7 +271,7 @@ class LazyTable extends React.Component {
       isResizeColumn,
     } = this.props;
     const { y } = scroll;
-    const { columnId, tableId, checkboxWidth, enterColumn, offsetWidth, scrollLeft } = this.state;
+    const { columnId, tableId, checkboxWidth, offsetWidth, scrollLeft } = this.state;
     const columnStyle = {
       height: rowHeight,
     };
@@ -268,12 +282,6 @@ class LazyTable extends React.Component {
 
     const resizedColumn = this.getResizedColumn(columns);
     const lazyStyle = { maxHeight: y };
-    if (enterColumn && isResizeColumn) {
-      // lazyStyle.overflow = 'hidden';
-      if (isEmpty) {
-        // lazyStyle.height = y;
-      }
-    }
 
     return (
       <div
@@ -368,6 +376,7 @@ LazyTable.defaultProps = {
   isResizeColumn: true,
   isScrollX: true,
   onChange: () => {},
+  onWidthResize: null,
 };
 LazyTable.propTypes = {
   dataSource: PropTypes.array.isRequired,
@@ -391,5 +400,6 @@ LazyTable.propTypes = {
   isResizeColumn: PropTypes.bool,
   isScrollX: PropTypes.bool,
   onChange: PropTypes.func,
+  onWidthResize: PropTypes.func,
 };
 export default LazyTable;
