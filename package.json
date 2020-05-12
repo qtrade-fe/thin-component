@@ -79,8 +79,9 @@
     "stylelint-prettier": "^1.1.1",
     "url-loader": "~0.6.2",
     "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-cli": "^3.3.11",
     "webpack-cos-plugin": "^1.1.2",
-    "webpack-dev-server": "^2.11.5",
+    "webpack-dev-server": "^3.11.0",
     "webpack-merge": "~4.1.1",
     "webpack-notifier": "~1.6.0"
   },
@@ -97,6 +98,6 @@
     "react-dom": "~16.6.0",
     "react-resizable": "^1.10.1",
     "react-router-dom": "~4.3.1",
-    "webpack": "~3.10.0"
+    "webpack": "^4.43.0"
   }
 }
