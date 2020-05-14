@@ -84,6 +84,7 @@ class Row extends React.Component {
       rowCellClassName,
       offsetWidth,
       scrollLeft,
+      noHorizonalVirtualization,
     } = this.props;
     const columns = this.getCurrentColumnsWidth();
     const arr = [];
@@ -115,7 +116,10 @@ class Row extends React.Component {
       const key = `${item[rowKey]}u${index}`;
       const widthDt = currentWidth - scrollLeft;
 
-      if (widthDt <= offsetWidth + item.width && widthDt >= -offsetWidth) {
+      if (
+        noHorizonalVirtualization ||
+        (widthDt <= offsetWidth + item.width && widthDt >= -offsetWidth)
+      ) {
         if (item.render) {
           return (
             <span style={spanStyle} key={key} {...onCellObj}>

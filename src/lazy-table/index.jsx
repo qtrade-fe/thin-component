@@ -234,6 +234,9 @@ class LazyTable extends React.Component {
         if (onWidthResize) {
           const resizedColumn = this.getResizedColumn(columns2);
           onWidthResize(resizedColumn);
+          this.setState({
+            columnSize: [],
+          });
         }
       }
     );
@@ -269,6 +272,7 @@ class LazyTable extends React.Component {
       rowCellClassName,
       headerCellClassName,
       isResizeColumn,
+      noHorizonalVirtualization,
     } = this.props;
     const { y } = scroll;
     const { columnId, tableId, checkboxWidth, offsetWidth, scrollLeft } = this.state;
@@ -336,6 +340,7 @@ class LazyTable extends React.Component {
                   rowKey={rowKey}
                   offsetWidth={offsetWidth}
                   scrollLeft={scrollLeft}
+                  noHorizonalVirtualization={noHorizonalVirtualization}
                 />
               );
             })}

@@ -180,6 +180,7 @@ class UseTreeDemo extends React.Component {
           onScrollBottom={() => {}}
           onWidthResize={null}
           isResizeColumn
+          noHorizonalVirtualization={false}
         />
       </div>
     );
