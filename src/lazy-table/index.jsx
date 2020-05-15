@@ -191,6 +191,13 @@ class LazyTable extends React.Component {
 
   getSortedDataSource = dataSource => {
     const { currentSorter, currentDirection } = this.state;
+    const { columns } = this.props;
+    const sortOrderLength = columns.filter(item => {
+      return typeof item.sortOrder === 'boolean' && item.sortOrder === false;
+    }).length;
+    if (sortOrderLength === columns.length) {
+      return dataSource;
+    }
 
     const copyData = [...dataSource];
     if (currentSorter) {
